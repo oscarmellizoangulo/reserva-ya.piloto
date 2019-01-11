@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CalendarPage } from '../calendar/calendar';
+import { AuthProvider } from '../../services/auth-service';
 
 @Component({
   selector: 'page-consultants',
@@ -13,7 +14,7 @@ export class ConsultantsPage {
     {name: 'Diana Patricia'},
     {name: 'Ruben Dario'}
   ]
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authProvider: AuthProvider) {
   }
 
   ionViewDidLoad() {
@@ -21,6 +22,7 @@ export class ConsultantsPage {
   }
 
   showCalendar(product){
+    this.authProvider.login();
     this.navCtrl.push(CalendarPage);
   }
 

@@ -9,13 +9,13 @@
     </div>
 
     <!-- Login form -->
-    <form class="list-form">
+    <form class="list-form" #f="ngForm">
       <ion-item>
         <ion-label floating>
           <ion-icon name="mail" item-start class="text-primary"></ion-icon>
           Correo Electronico
         </ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -23,7 +23,7 @@
           <ion-icon name="lock" item-start class="text-primary"></ion-icon>
           Clave
         </ion-label>
-        <ion-input type="password"></ion-input>
+        <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
       </ion-item>
     </form>
 
@@ -34,28 +34,6 @@
         <ion-icon name="log-in"></ion-icon>
         Ingresar
       </button>
-
-      <p text-center ion-text color="secondary">O registrate con:</p>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-facebook">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-twitter">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </button>
-          </ion-col>
-          <ion-col col-4>
-            <button ion-button icon-only block class="btn-gplus">
-              <ion-icon name="logo-googleplus"></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
 
     </div>
 

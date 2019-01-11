@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AuthProvider } from '../../services/auth-service';
 
 @Component({
   selector: 'page-calendar',
@@ -7,22 +8,47 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CalendarPage {
   email;
-  eventSource;
+  eventSource = [];
   viewTitle;
   isToday: boolean;
   calendar = {
       mode: 'day',
       currentDate: new Date()
   }; // these are the variable used by the calendar.
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authProvider: AuthProvider) {
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalendarPage');
+    this.authProvider.login();
+    this.authProvider.getCalendar();
+    setTimeout(()=>{
+        this.cargarEventos();
+    },2000)
+    
   }
-
+  cargarEventos(){
+    
+    var events = this.authProvider.calendarItems;
+    var even = [];
+    var i;
+    for (i = 0; i < events.length; i++) { 
+        var eve = events[i];
+        even.push({
+            title: eve.summary,
+            startTime: new Date(eve.start.dateTime),
+            endTime: new Date(eve.end.dateTime),
+            allDay: false
+        });
+    }
+    this.eventSource = even;
+    this.today();
+    
+  }
   loadEvents() {
-    this.eventSource = this.createRandomEvents();
+    this.cargarEventos();
+    //this.eventSource = this.createRandomEvents();
   }
   onViewTitleChanged(title) {
       this.viewTitle = title;

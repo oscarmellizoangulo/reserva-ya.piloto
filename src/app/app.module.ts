@@ -37,6 +37,7 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { CalendarPage } from "../pages/calendar/calendar";
 import { Geolocation } from '@ionic-native/geolocation';
 import { ConsultantsPage } from "../pages/consultants/consultants";
+import { ClientProvider } from "../services/client-service";
 // import services
 // end import services
 // end import services
@@ -116,7 +117,8 @@ export const firebaseConfig = {
     WeatherProvider,
     AuthProvider,
     GoogleMaps,
-    Geolocation
+    Geolocation,
+    ClientProvider
   ]
 })
 

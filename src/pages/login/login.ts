@@ -2,16 +2,18 @@ import {Component} from "@angular/core";
 import {NavController, AlertController, ToastController, MenuController} from "ionic-angular";
 import {HomePage} from "../home/home";
 import {RegisterPage} from "../register/register";
-import { CalendarPage } from "../calendar/calendar";
 import { SelectorProductsPage } from "../selector-products/selector-products";
+import { AuthProvider } from "../../services/auth-service";
+import { ClientProvider } from "../../services/client-service";
 
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
 })
 export class LoginPage {
-
-  constructor(public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController) {
+  email;
+  password;
+  constructor(public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController, public clientProvider: ClientProvider) {
     this.menu.swipeEnable(false);
   }
 
@@ -22,9 +24,13 @@ export class LoginPage {
 
   // login and go to home page
   login() {
-    this.nav.setRoot(SelectorProductsPage);
+    this.clientProvider.signInWithEmail(this.email, this.password);
+    console.log(this.clientProvider.authState);
+      
+        this.nav.setRoot(SelectorProductsPage);  
+      
   }
-
+  
   forgotPass() {
     let forgot = this.forgotCtrl.create({
       title: 'Forgot Password?',
